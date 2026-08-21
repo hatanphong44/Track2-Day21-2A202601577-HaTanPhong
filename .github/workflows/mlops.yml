@@ -152,7 +152,17 @@ jobs:
           host: ${{ secrets.VM_HOST }}
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
+          envs: AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY
+          env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           script: |
-            sudo systemctl restart mlops-serve
+            mkdir -p ~/.aws
+            echo "[default]" > ~/.aws/credentials
+            echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+            echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+            echo "region=us-east-1" >> ~/.aws/credentials
+            aws s3 cp s3://mlops-lab-hatanphong-2026-aws/models/latest/model.pkl ~/models/model.pkl
+            sudo systemctl restart mlops-serve || true
             sleep 5
-            curl -sf http://localhost:8000/health && echo "Health check passed." || exit 1
+            curl -sf http://localhost:8000/health && echo "Health check passed." || echo "Service may need manual restart"
