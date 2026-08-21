@@ -10,7 +10,9 @@ from sklearn.metrics import accuracy_score, f1_score
 
 # Init MLflow tracking
 # Updated for continuous training with new data
-mlflow.set_tracking_uri("file:./mlruns")
+import os
+tracking_uri = os.path.abspath("./mlruns")
+mlflow.set_tracking_uri(f"file://{tracking_uri}")
 mlflow.set_experiment("wine-quality")
 
 EVAL_THRESHOLD = 0.70
