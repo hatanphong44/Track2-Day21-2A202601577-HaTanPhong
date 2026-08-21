@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
 
 # Init MLflow tracking
+# Updated for continuous training with new data
 mlflow.set_tracking_uri("file:./mlruns")
 mlflow.set_experiment("wine-quality")
 
