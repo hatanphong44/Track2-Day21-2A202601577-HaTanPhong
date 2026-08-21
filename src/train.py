@@ -14,6 +14,7 @@ import os
 tracking_uri = os.path.abspath("./mlruns")
 mlflow.set_tracking_uri(f"file://{tracking_uri}")
 mlflow.set_experiment("wine-quality")
+mlflow.set_experiment("wine-quality")
 
 EVAL_THRESHOLD = 0.70
 
