@@ -62,6 +62,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           echo "AWS_REGION=us-east-1" >> $GITHUB_ENV
+          mkdir -p ~/.aws
+          echo "[default]" > ~/.aws/credentials
+          echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+          echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
 
       - name: Pull data with DVC
         run: dvc pull data/train_phase1.csv data/eval.csv
