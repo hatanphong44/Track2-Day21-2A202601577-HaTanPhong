@@ -83,7 +83,7 @@ jobs:
           python - <<'EOF'
           import boto3
           import os
-          bucket = os.environ.get("S3_BUCKET", "mlops-lab-hatanphong-2026")
+          bucket = os.environ.get("S3_BUCKET", "mlops-lab-hatanphong-2026-aws")
           s3_client = boto3.client("s3")
           s3_client.upload_file(
               "models/model.pkl",
@@ -116,9 +116,9 @@ jobs:
         run: |
           python - <<'EOF'
           acc = float("${{ needs.train.outputs.accuracy }}")
-          if acc < 0.60:
-              raise SystemExit(f"FAILED: accuracy {acc:.4f} < 0.70. Huy deploy.")
-          print(f"PASSED: accuracy {acc:.4f} >= 0.70. Dang trien khai model.")
+          if acc < 0.68:
+              raise SystemExit(f"FAILED: accuracy {acc:.4f} < 0.68. Huy deploy.")
+          print(f"PASSED: accuracy {acc:.4f} >= 0.68. Dang trien khai model.")
           EOF
 
 

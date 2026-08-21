@@ -1,4 +1,4 @@
 [core]
     remote = myremote
 ['remote "myremote"']
-    url = s3://mlops-lab-hatanphong-2026/dvc
+    url = s3://mlops-lab-hatanphong-2026-aws/dvc
